@@ -10,24 +10,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static constants.AccountTags.*;
+
 public class FileHandlerToAccount {
 
     public List<Account> listToAccount(List<String> lines) {
         List<Account> accounts = new ArrayList<>();
+        Account account = new Account();
 
         for(int i = 0; i< lines.size(); i++) {
-            if (lines.get(i).contains("<account") && lines.get(i+5).contains("</account>")) {
+
+            if (lines.get(i).contains(IBAN)) {
+                account.setIban(getIbanFromLine(lines.get(i)));
+
+                account.setName(getStringData(lines.get(i+1)));
+
+                account.setCurrency(getStringData(lines.get(i+2)));
+
+                account.setBalance(getBalanceFromLine(lines.get(i+3)));
+
                 try {
-                    accounts.add(new Account(
-                            getIbanFromLine(lines.get(i)),
-                            getStringData(lines.get(i+1)),
-                            getStringData(lines.get(i+2)),
-                            getBalanceFromLine(lines.get(i+3)),
-                            getDateFromLine(lines.get(i+4))));
-                    i+=5;
+                    account.setClosingDate(getDateFromLine(lines.get(i+4)));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+            }
+            if (lines.get(i).contains("</account>")) {
+                accounts.add(account);
+                account = new Account();
             }
         }
 
@@ -47,8 +57,8 @@ public class FileHandlerToAccount {
     }
 
     private Date getDateFromLine(String s) throws ParseException {
-        String DATA_FORMAT = "yyyy-MM-dd";
-        DateFormat format = new SimpleDateFormat(DATA_FORMAT);
+        String dataFormat = "yyyy-MM-dd";
+        DateFormat format = new SimpleDateFormat(dataFormat);
         return format.parse(getStringData(s));
     }
 

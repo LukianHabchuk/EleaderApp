@@ -13,6 +13,7 @@ public class WriteXML {
 
     public void writeFile(List<String> lines) throws IOException {
         Files.write(Paths.get(OUTPUT_FILE_NAME), lines);
-        Logger.getAnonymousLogger().log(Level.INFO, "file written successfully");
+        Logger.getAnonymousLogger()
+                .log(Level.INFO, "file written successfully");
     }
 }

@@ -5,14 +5,15 @@ import entity.Account;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class AccountValidator {
+public final class AccountValidator {
+    private AccountValidator() { }
 
     public static boolean isCurrencyCorrect(Account a) {
         return a.getCurrency().equals("PLN");
     }
 
     public static boolean isBalanceCorrect(Account a) {
-        return !(a.getBalance().compareTo(BigDecimal.ZERO) < 0);
+        return (a.getBalance().compareTo(BigDecimal.ZERO) >= 0);
     }
 
     public static boolean isClosingDateCorrect(Account a) {
@@ -20,11 +21,9 @@ public class AccountValidator {
     }
 
     public static boolean isIbanCorrect(String iban) {
-
-        if (isIbanPL(iban) && hasIbanDigits(iban) && hasIbanRightLength(iban)) {
-            return true;
-        }
-        return false;
+        return (isIbanPL(iban)
+                && hasIbanDigits(iban)
+                && hasIbanRightLength(iban));
     }
 
     private static boolean isIbanPL(String iban) {
@@ -36,7 +35,8 @@ public class AccountValidator {
     }
 
     private static boolean hasIbanRightLength(String iban) {
-        return iban.length() == 28;
+        int ibanLength = 28;
+        return iban.length() == ibanLength;
     }
 
 }

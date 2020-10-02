@@ -11,16 +11,22 @@ public class FileHandlerFromAccount {
 
     public List<String> listFromAccount(List<Account> accounts) {
         List<String> lines = new ArrayList<>();
-        lines.add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + "\n" +
-                "<accounts>");
+        lines.add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+                + "\n"
+                + "<accounts>");
 
         accounts
-                .forEach(a -> lines.add(getIbanLine(a) + "\n" +
-                        getNameLine(a) + "\n" +
-                        getCurrencyLine(a) + "\n" +
-                        getBalanceLine(a) + "\n" +
-                        getClosingDateLine(a) + "\n" +
-                        getCloseAccountTag()));
+                .forEach(a -> lines.add(getIbanLine(a)
+                        + "\n"
+                        + getNameLine(a)
+                        + "\n"
+                        + getCurrencyLine(a)
+                        + "\n"
+                        + getBalanceLine(a)
+                        + "\n"
+                        + getClosingDateLine(a)
+                        + "\n"
+                        + "        </account>"));
 
         lines.add("</accounts>");
         return lines;
@@ -43,15 +49,13 @@ public class FileHandlerFromAccount {
     }
 
     private String getClosingDateLine(Account a) {
-        return "                <closingDate>" + formatDateToString(a.getClosingDate()) + "</closingDate>";
+        return "                <closingDate>"
+                + formatDateToString(a.getClosingDate())
+                + "</closingDate>";
     }
 
     private String formatDateToString(Date date) {
-        String DATA_FORMAT = "yyyy-MM-dd";
-        return new SimpleDateFormat(DATA_FORMAT).format(date);
-    }
-
-    private String getCloseAccountTag() {
-        return "        </account>";
+        String dataFormat = "yyyy-MM-dd";
+        return new SimpleDateFormat(dataFormat).format(date);
     }
 }

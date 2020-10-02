@@ -16,7 +16,10 @@ public class FilterAccounts {
         List<Account> accountsResult = new ArrayList<>();
         accounts
                 .forEach(a -> {
-                    if (isCurrencyCorrect(a) && isBalanceCorrect(a) && isClosingDateCorrect(a) && isIbanCorrect(a.getIban())) {
+                    if (isCurrencyCorrect(a)
+                            && isBalanceCorrect(a)
+                            && isClosingDateCorrect(a)
+                            && isIbanCorrect(a.getIban())) {
                         accountsResult.add(a);
                     }
                 });

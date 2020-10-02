@@ -1,3 +1,5 @@
+package app;
+
 import entity.Account;
 import handler.FileHandlerFromAccount;
 import handler.FileHandlerToAccount;
@@ -8,8 +10,6 @@ import service.WriteXML;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -31,8 +31,5 @@ public class Main {
 
         WriteXML writeXML = new WriteXML();
         writeXML.writeFile(linesToSave);
-
-        Logger.getAnonymousLogger().log(Level.INFO, "total accounts number: "+accountsMapped.size());
-        Logger.getAnonymousLogger().log(Level.INFO, "correct accounts number: "+accountsFiltered.size());
     }
 }

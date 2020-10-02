@@ -1,6 +1,7 @@
 package validator;
 
 import entity.Account;
+import junitparams.Parameters;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +64,7 @@ public class AccountValidatorTest {
     }
 
     @Test
-    public void isIbanCorrectIsIbanPLShouldReturnFalse() {
+    public void isIbanCorrectShouldReturnFalse() {
         Account wrongIbanAccount = correctAccount;
         wrongIbanAccount.setIban("PP61109010140000071219812875");
         Assert.assertFalse(AccountValidator.isIbanCorrect(wrongIbanAccount.getIban()));

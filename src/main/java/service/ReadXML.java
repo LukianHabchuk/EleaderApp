@@ -17,8 +17,7 @@ public class ReadXML {
         List<String> lines = new ArrayList<>();
         File accountsFile = new File(INPUT_FILE_NAME);
 
-        try {
-            Scanner scanner = new Scanner(accountsFile);
+        try (Scanner scanner = new Scanner(accountsFile)) {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
             }
